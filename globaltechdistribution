@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Global Tech Distribution | Autumn Allocation 2026</title>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+    <!-- PayPal SDK со USD валута -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAp4KE8A-c9gp8ICjTHkHPVK3JH8LK1M6iXXTZNePW6y3gpmQFOYVpnBC7k8TBcFUZmw1u47Zp2Ax69Fs&currency=USD"></script>
+
+    <style>
+        :root {
+            --glass-bg: rgba(18, 18, 28, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: #2563EB;
+            --accent-glow: rgba(37, 99, 235, 0.3);
+            --text-main: #F8FAFC;
+            --text-sub: #94A3B8;
+            --input-bg: rgba(15, 23, 42, 0.6);
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f172a, #020617);
+            color: var(--text-main);
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 12px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            min-height: 94vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 24px 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .screen.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-badge {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 14px auto;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .logo-badge svg {
+            width: 30px;
+            height: 30px;
+            fill: #60A5FA;
+        }
+
+        h1 {
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 16px;
+            font-weight: 700;
+            color: #60A5FA;
+            margin-bottom: 2px;
+        }
+
+        .stat-box .label {
+            font-size: 10px;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+        }
+
+        .info-card h3 {
+            font-size: 11px;
+            color: #60A5FA;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .info-card ul {
+            list-style: none;
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        .info-card ul li::before {
+            content: "▪ ";
+            color: #60A5FA;
+        }
+
+        .hardware-showcase {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(37,99,235,0.08), rgba(255,255,255,0.02));
+            border: 1px solid rgba(37,99,235,0.2);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+        }
+
+        .hardware-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .hardware-info p {
+            font-size: 11px;
+            color: var(--text-sub);
+        }
+
+        .hardware-tag {
+            background: rgba(37, 99, 235, 0.2);
+            color: #60A5FA;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .price-display {
+            background: rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #60A5FA;
+            margin: 10px 0 14px 0;
+        }
+
+        .security-notice {
+            font-size: 11px;
+            color: var(--text-sub);
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 14px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            transition: opacity 0.2s, transform 0.1s;
+            text-align: center;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            box-shadow: none;
+            margin-top: 8px;
+        }
+
+        .codes-container {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 10px;
+            max-height: 110px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            color: #60A5FA;
+            margin-top: 8px;
+            text-align: left;
+        }
+
+        .footer-info {
+            text-align: center;
+            font-size: 10px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- SCREEN 1: PROFESSIONAL LANDING PAGE -->
+    <div id="screen1" class="screen active">
+        <div>
+            <div class="brand-header">
+                <div class="logo-badge">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h1>Global Tech Allocation</h1>
+                <p class="subtitle">Q3 Hardware Distribution Portal</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number">15 Units</div>
+                    <div class="label">Allocation Pool</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">Active</div>
+                    <div class="label">Status</div>
+                </div>
+            </div>
+
+            <div class="hardware-showcase">
+                <div class="hardware-info">
+                    <h4>iPhone 17 Pro Max</h4>
+                    <p>256GB • Titanium Edition</p>
+                </div>
+                <div class="hardware-tag">Flagship</div>
+            </div>
+
+            <div class="info-card">
+                <h3>Distribution Protocol</h3>
+                <ul>
+                    <li>Open allocation for verified registered participants.</li>
+                    <li>Entry tickets are dynamically generated per unit allocation ($1 per ticket).</li>
+                    <li>Final selection audit scheduled for August 25, 2026.</li>
+                    <li>Maximum participation threshold: 50 tickets ($50) per entity.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <button class="btn" onclick="goToScreen(2)">Proceed to Registration</button>
+            <div class="footer-info">Encrypted Session • Secure Gateway</div>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: REGISTRATION & PAYMENT -->
+    <div id="screen2" class="screen">
+        <div>
+            <div class="brand-header" style="margin-bottom: 14px;">
+                <h1>Participant Verification</h1>
+                <p class="subtitle">Complete details to secure allocation entries</p>
+            </div>
+
+            <div id="userForm">
+                <div class="form-group">
+                    <label>Full Legal Name</label>
+                    <input type="text" id="userName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Corporate / Personal Email</label>
+                    <input type="email" id="userEmail" placeholder="john.doe@domain.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Allocation Tickets ($1 each, max 50)</label>
+                    <input type="number" id="userPoints" min="1" max="50" value="1" oninput="updatePointsCalculation()" onblur="enforceMinimum()" required>
+                </div>
+
+                <div class="price-display" id="priceText">Total Fee: $1.00 USD</div>
+
+                <div class="security-notice">
+                    Secure checkout processed via <strong>PayPal</strong>. Major credit and debit cards accepted.
+                </div>
+
+                <!-- PayPal Button Container -->
+                <div id="paypal-button-container"></div>
+
+                <button type="button" class="btn btn-secondary" onclick="goToScreen(1)">Back</button>
+            </div>
+        </div>
+
+        <div class="footer-info">TLS 1.3 Encryption Active</div>
+    </div>
+
+    <!-- SCREEN 3: CONFIRMATION / RECEIPT -->
+    <div id="screen3" class="screen">
+        <div>
+            <div class="brand-header">
+                <div style="font-size: 36px; margin-bottom: 8px;">🛡️</div>
+                <h1 style="color: var(--success);">Registration Confirmed</h1>
+                <p class="subtitle">Your allocation has been successfully recorded</p>
+            </div>
+
+            <div class="info-card" style="border-color: rgba(16, 185, 129, 0.3);">
+                <h3>Audit Summary</h3>
+                <ul>
+                    <li><strong>Participant:</strong> <span id="resName" style="color:white;"></span></li>
+                    <li><strong>Email:</strong> <span id="resEmail" style="color:white;"></span></li>
+                    <li><strong>Tickets Assigned:</strong> <span id="resPoints" style="color:#60A5FA;"></span></li>
+                </ul>
+                <div class="codes-container" id="resCodesList">Generating secure hashes...</div>
+            </div>
+
+            <div class="security-notice" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); color: #CBD5E1;">
+                Your unique ticket hashes have been securely logged for the August 25 audit. Keep a record of your credentials.
+            </div>
+        </div>
+
+        <div>
+            <button class="btn" onclick="location.reload()">Close Session</button>
+            <div class="footer-info">Global Tech Distribution © 2026</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Firebase Initialization
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjtLcksqBPEjFoo0KowMIay2cHCwOY-OY",
+        authDomain: "giveawaysmk-3ea01.firebaseapp.com",
+        databaseURL: "https://giveawaysmk-3ea01-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "giveawaysmk-3ea01",
+        storageBucket: "giveawaysmk-3ea01.appspot.com",
+        messagingSenderId: "181374074515",
+        appId: "1:181374074515:web:713f0b2a57538411315766"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    function goToScreen(screenNum) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + screenNum).classList.add('active');
+        
+        if(screenNum === 2) {
+            renderPayPalButton();
+        }
+    }
+
+    function updatePointsCalculation() {
+        let inputField = document.getElementById('userPoints');
+        if (inputField.value === "") {
+            document.getElementById('priceText').innerText = "Total Fee: $0.00 USD";
+            return;
+        }
+        let pts = parseInt(inputField.value);
+        if (pts > 50) {
+            inputField.value = 50;
+            pts = 50;
+        }
+        document.getElementById('priceText').innerText = "Total Fee: $" + pts + ".00 USD";
+    }
+
+    function enforceMinimum() {
+        let inputField = document.getElementById('userPoints');
+        let pts = parseInt(inputField.value);
+        if (isNaN(pts) || pts < 1) {
+            inputField.value = 1;
+            updatePointsCalculation();
+        }
+    }
+
+    function generateCodes(count) {
+        let codes = [];
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for (let i = 0; i < count; i++) {
+            let code = "GT-";
+            for (let j = 0; j < 6; j++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            codes.push(code);
+        }
+        return codes;
+    }
+
+    let paypalRendered = false;
+    function renderPayPalButton() {
+        const container = document.getElementById('paypal-button-container');
+        if (paypalRendered) return;
+        
+        if (typeof paypal === 'undefined') {
+            container.innerHTML = "<p style='color:#EF4444; font-size:12px; text-align:center;'>PayPal SDK failed to load. Check network connection.</p>";
+            return;
+        }
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                let pts = parseInt(document.getElementById('userPoints').value);
+                if (isNaN(pts) || pts < 1) pts = 1;
+                if (pts > 50) pts = 50;
+                
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: pts.toString()
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    saveUserDataToFirebase();
+                });
+            },
+            onError: function(err) {
+                alert("Transaction error occurred. Please try again.");
+            }
+        }).render('#paypal-button-container');
+        
+        paypalRendered = true;
+    }
+
+    function saveUserDataToFirebase() {
+        let name = document.getElementById('userName').value.trim();
+        let email = document.getElementById('userEmail').value.trim();
+        let points = parseInt(document.getElementById('userPoints').value) || 1;
+
+        if(!name || !email) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        let userCodes = generateCodes(points);
+        let timestamp = new Date().toISOString();
+
+        let newUserRef = database.ref('participants').push();
+        newUserRef.set({
+            name: name,
+            email: email,
+            points: points,
+            codes: userCodes,
+            createdAt: timestamp
+        }, function(error) {
+            if (error) {
+                alert("Database synchronization error.");
+            } else {
+                document.getElementById('resName').innerText = name;
+                document.getElementById('resEmail').innerText = email;
+                document.getElementById('resPoints').innerText = points + " Tickets ($" + points + ".00 USD)";
+                
+                let codesHtml = userCodes.join("<br>");
+                document.getElementById('resCodesList').innerHTML = codesHtml;
+
+                goToScreen(3);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
