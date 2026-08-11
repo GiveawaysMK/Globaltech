@@ -3,150 +3,660 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>iPhone 17 Pro Max Giveaway</title>
+    <title>iPhone 17 Pro Max | Official Global Giveaway</title>
+    
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+    <!-- PayPal SDK with USD currency -->
     <script src="https://www.paypal.com/sdk/js?client-id=BAAp4KE8A-c9gp8ICjTHkHPVK3JH8LK1M6iXXTZNePW6y3gpmQFOYVpnBC7k8TBcFUZmw1u47Zp2Ax69Fs&currency=USD"></script>
+
     <style>
         :root {
-            --bg-dark: #050505;
+            --glass-bg: rgba(16, 12, 10, 0.94);
+            --glass-border: rgba(255, 138, 76, 0.22);
             --accent: #FF6B00;
-            --glass: rgba(255, 255, 255, 0.06);
-            --text-white: #FFFFFF;
+            --accent-hover: #E05E00;
+            --accent-glow: rgba(255, 107, 0, 0.4);
+            --text-main: #FFFFFF;
+            --text-sub: #D1D5DB;
+            --input-bg: rgba(30, 20, 16, 0.85);
+            --success: #10B981;
         }
 
-        * { box-sizing: border-box; touch-action: manipulation; }
-        
-        body {
+        * {
             margin: 0;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #2e1205, #080504);
+            color: var(--text-main);
+            height: 100vh;
+            height: 100svh;
+            width: 100vw;
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            justify-content: center;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 410px;
+            height: 94vh;
+            height: 94svh;
+            max-height: 820px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 26px;
+            padding: 16px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 138, 76, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
             overflow: hidden;
         }
 
-        .container {
-            width: 100vw;
-            height: 100vh;
-            max-width: 480px;
-            display: flex;
+        .screen {
+            display: none;
             flex-direction: column;
-            background: radial-gradient(circle at 50% -20%, #2a1200, #050505);
-            padding: 20px;
-            position: relative;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 2px;
         }
 
-        .screen { display: none; flex-direction: column; height: 100%; opacity: 0; transition: opacity 0.3s; }
-        .screen.active { display: flex; opacity: 1; }
+        .screen::-webkit-scrollbar {
+            width: 3px;
+        }
+        .screen::-webkit-scrollbar-thumb {
+            background: rgba(255, 107, 0, 0.3);
+            border-radius: 3px;
+        }
 
-        .logo-wrapper {
-            margin: 20px auto 15px auto;
-            width: 80px; height: 80px;
-            background: var(--accent);
-            border-radius: 24px;
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 40px rgba(255, 107, 0, 0.3);
+        .screen.active {
+            display: flex;
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 12px;
+            padding-top: 4px;
             flex-shrink: 0;
         }
 
-        h1 { font-size: 24px; text-align: center; margin: 0 0 5px 0; }
-        .counter { font-size: 14px; text-align: center; color: var(--accent); font-weight: bold; margin-bottom: 20px; }
+        /* Safe bounded container for logo so it never touches walls */
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
 
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            padding: 20px;
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 20px;
+        .logo-badge {
+            width: 58px;
+            height: 58px;
+            background: linear-gradient(135deg, #ff6b00, #b33600);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.45);
+            animation: floatAndPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes floatAndPulse {
+            0% { transform: translateY(0px) scale(1); box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35); }
+            50% { transform: translateY(-3px) scale(1.03); box-shadow: 0 10px 25px rgba(255, 107, 0, 0.55); }
+            100% { transform: translateY(0px) scale(1); box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35); }
+        }
+
+        .logo-badge svg {
+            width: 28px;
+            height: 28px;
+            fill: #ffffff;
+        }
+
+        h1 {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            color: #ffffff;
+            margin-bottom: 2px;
+            background: linear-gradient(to right, #ffffff, #ffb380);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 10px;
+            color: #ffb380;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 138, 76, 0.15);
+            border-radius: 12px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .stat-box .number {
             font-size: 14px;
-            line-height: 1.5;
+            font-weight: 800;
+            color: #ff944d;
+            margin-bottom: 1px;
+        }
+
+        .stat-box .label {
+            font-size: 8px;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 600;
+        }
+
+        .hardware-showcase {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.18), rgba(128, 43, 0, 0.25));
+            border: 1px solid rgba(255, 148, 77, 0.4);
+            border-radius: 12px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .hardware-info h4 {
+            font-size: 12px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .hardware-info p {
+            font-size: 9px;
+            color: #ffb380;
+            font-weight: 500;
+            margin-top: 1px;
+        }
+
+        .hardware-tag {
+            background: var(--accent);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 138, 76, 0.15);
+            border-radius: 14px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+        }
+
+        .info-card h3 {
+            font-size: 10px;
+            color: #ffb380;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .info-card p {
+            font-size: 10px;
+            color: var(--text-sub);
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+
+        .info-card ul {
+            list-style: none;
+            font-size: 10px;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        .info-card ul li {
+            margin-bottom: 3px;
+        }
+
+        .info-card ul li::before {
+            content: "✨ ";
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            margin-bottom: 3px;
+            letter-spacing: 0.7px;
         }
 
         input {
             width: 100%;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid #333;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 10px 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 11px;
             color: white;
-            margin: 10px 0;
+            font-size: 12px;
+            outline: none;
+            transition: all 0.2s ease;
         }
 
-        button {
-            background: var(--accent);
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .price-display {
+            background: rgba(255, 107, 0, 0.15);
+            border: 1px solid rgba(255, 107, 0, 0.35);
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 800;
+            color: #ffb380;
+            margin: 4px 0 8px 0;
+        }
+
+        .security-notice {
+            font-size: 9px;
+            color: var(--text-sub);
+            text-align: center;
+            line-height: 1.35;
+            margin-bottom: 8px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px;
+            border-radius: 9px;
+            border: 1px solid rgba(255, 138, 76, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff6b00, #cc5500);
             color: white;
             border: none;
-            padding: 18px;
-            border-radius: 16px;
-            font-weight: bold;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 5px 18px var(--accent-glow);
+            transition: all 0.2s ease;
+            text-align: center;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ff8533, #ff6b00);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            box-shadow: none;
+            margin-top: 5px;
+        }
+
+        .codes-container {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 138, 76, 0.3);
+            border-radius: 9px;
+            padding: 8px;
+            max-height: 95px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 10px;
+            color: #ffb380;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        .footer-info {
+            text-align: center;
+            font-size: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            margin-top: 6px;
+            font-weight: 600;
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body>
 
-<div class="container" id="app">
-    <!-- Screen 1 -->
-    <div id="s1" class="screen active">
-        <div class="logo-wrapper"></div>
-        <h1>iPhone 17 Pro Max Giveaway</h1>
-        <div class="counter" id="participantCount">1,248+ participants</div>
-        <div class="card">
-            <strong>Official Event Details:</strong><br>
-            • 15 units of iPhone 17 Pro Max.<br>
-            • Live drawing: Aug 25, 2026.<br>
-            • Max 50 entries per user.<br>
-            • Winners notified via email.
+<div class="app-container">
+
+    <!-- SCREEN 1: GIVEAWAY LANDING PAGE -->
+    <div id="screen1" class="screen active">
+        <div>
+            <div class="brand-header">
+                <div class="logo-container">
+                    <div class="logo-badge">
+                        <svg viewBox="0 0 170 170">
+                            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.17-2.61-7.01-7.23-11.53-13.84-6.3-9.22-11.26-19.34-14.88-30.36-3.62-11.03-5.43-21.73-5.43-32.11 0-14.62 3.73-26.69 11.19-36.2 7.46-9.51 16.92-14.34 28.38-14.48 4.79 0 10.12 1.21 15.98 3.63 5.86 2.42 9.77 3.63 11.74 3.63 1.74 0 5.8-1.29 12.18-3.88 6.38-2.58 11.95-3.8 16.71-3.66 12.87.54 22.9 4.87 30.1 12.99-11.51 7.01-17.15 16.65-16.92 28.92.22 9.79 4.13 17.92 11.73 24.39 7.6 6.47 16.59 9.99 26.97 10.56-2.5 7.74-5.9 15.61-10.21 23.61zM119.22 32.5c0-7.85 2.87-15.15 8.6-21.9 5.73-6.75 13.06-10.6 21-11.55.11 1.09.16 2.07.16 2.94 0 7.74-3.05 15.36-9.14 22.87-6.09 7.51-13.56 11.66-22.41 12.46-.11-.98-.21-1.95-.21-2.92z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h1>iPhone 17 Pro Max Giveaway</h1>
+                <p class="subtitle">Official Global Event Pool</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number" id="liveParticipantCount">1,248</div>
+                    <div class="label">Total Participants</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">15 Units</div>
+                    <div class="label">Grand Prize Pool</div>
+                </div>
+            </div>
+
+            <div class="hardware-showcase">
+                <div class="hardware-info">
+                    <h4>iPhone 17 Pro Max</h4>
+                    <p>256GB • Cosmic Orange Titanium</p>
+                </div>
+                <div class="hardware-tag">Grand Prize</div>
+            </div>
+
+            <div class="info-card">
+                <h3>Event Rules & Information</h3>
+                <p>We are awarding <strong>15 units</strong> of the iPhone 17 Pro Max in Cosmic Orange.</p>
+                <ul>
+                    <li><strong>Live Drawing:</strong> The event will be broadcasted live on this app on August 25, 2026.</li>
+                    <li><strong>Entries & Max Limit:</strong> Each entry/point is $1 USD = 1 Ticket ID. Maximum limit is 50 entries ($50) per participant.</li>
+                    <li><strong>Winner Notifications:</strong> Winners will be announced live and immediately notified via registered email to provide their delivery address.</li>
+                    <li><strong>Action Required:</strong> After payment, your unique codes will appear instantly on screen. Take a screenshot (SS) to save them!</li>
+                </ul>
+            </div>
         </div>
-        <button onclick="goTo(2)">Start Registration</button>
+
+        <div>
+            <button class="btn" onclick="goToScreen(2)">Enter Giveaway Now</button>
+            <div class="footer-info">Secure Official Giveaway Portal • TLS 1.3</div>
+        </div>
     </div>
 
-    <!-- Screen 2 -->
-    <div id="s2" class="screen">
-        <h2 style="text-align:center">Registration</h2>
-        <input type="text" id="name" placeholder="Full Name">
-        <input type="email" id="email" placeholder="Email Address">
-        <input type="number" id="pts" placeholder="Entries (Max 50)" max="50">
-        <div id="paypal-button-container" style="margin-top:20px"></div>
-        <button onclick="goTo(1)" style="background:#333; margin-top:10px">Back</button>
+    <!-- SCREEN 2: REGISTRATION & PAYMENT -->
+    <div id="screen2" class="screen">
+        <div>
+            <div class="brand-header" style="margin-bottom: 8px;">
+                <h1>Secure Your Entries</h1>
+                <p class="subtitle">Fill details (Max 50 entries allowed)</p>
+            </div>
+
+            <div id="userForm">
+                <div class="form-group">
+                    <label>Full Legal Name</label>
+                    <input type="text" id="userName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Personal Email</label>
+                    <input type="email" id="userEmail" placeholder="john.doe@domain.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Giveaway Entries ($1 each, Max 50)</label>
+                    <input type="number" id="userPoints" min="1" max="50" value="1" oninput="updatePointsCalculation()" onblur="enforceMinimum()" required>
+                </div>
+
+                <div class="price-display" id="priceText">Total Fee: $1.00 USD</div>
+
+                <div class="security-notice">
+                    Secure checkout processed safely via <strong>PayPal</strong>.
+                </div>
+
+                <!-- PayPal Button Container -->
+                <div id="paypal-button-container"></div>
+
+                <button type="button" class="btn btn-secondary" onclick="goToScreen(1)">Back</button>
+            </div>
+        </div>
+
+        <div class="footer-info">Encrypted Payment Gateway</div>
     </div>
 
-    <!-- Screen 3 -->
-    <div id="s3" class="screen">
-        <h2 style="text-align:center">Success!</h2>
-        <div class="card" id="codeDisplay"></div>
-        <button onclick="location.reload()">Done</button>
+    <!-- SCREEN 3: CONFIRMATION / RECEIPT -->
+    <div id="screen3" class="screen">
+        <div>
+            <div class="brand-header">
+                <div style="font-size: 28px; margin-bottom: 2px;">🎉</div>
+                <h1 style="color: var(--success);">You're In the Draw!</h1>
+                <p class="subtitle">Entries successfully registered</p>
+            </div>
+
+            <div class="info-card" style="border-color: rgba(16, 185, 129, 0.4);">
+                <h3>Participant Pass & Codes</h3>
+                <ul style="margin-bottom: 4px;">
+                    <li><strong>Name:</strong> <span id="resName" style="color:white;"></span></li>
+                    <li><strong>Email:</strong> <span id="resEmail" style="color:white;"></span></li>
+                    <li><strong>Entries Secured:</strong> <span id="resPoints" style="color:#ffb380;"></span></li>
+                </ul>
+                <div class="codes-container" id="resCodesList">Generating secure entry hashes...</div>
+            </div>
+
+            <div class="security-notice" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); color: #CBD5E1;">
+                <strong>Action Required:</strong> Take a Screenshot (SS) now! These are your digital ticket codes for the live drawing on August 25.
+            </div>
+        </div>
+
+        <div>
+            <button class="btn" onclick="location.reload()">Done</button>
+            <div class="footer-info">iPhone 17 Pro Max Giveaway © 2026</div>
+        </div>
     </div>
+
 </div>
 
 <script>
-    const firebaseConfig = { /* ...вашиот конфиг... */ };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    // Security layer: Prevent Inspection / DevTools
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+        if (e.key === 'F12' || 
+            (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) || 
+            (e.ctrlKey && ['U','u'].includes(e.key))) {
+            e.preventDefault();
+            return false;
+        }
+    });
 
-    function goTo(n) {
+    // Firebase Initialization & Realtime Counter Sync
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjtLcksqBPEjFoo0KowMIay2cHCwOY-OY",
+        authDomain: "giveawaysmk-3ea01.firebaseapp.com",
+        databaseURL: "https://giveawaysmk-3ea01-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "giveawaysmk-3ea01",
+        storageBucket: "giveawaysmk-3ea01.appspot.com",
+        messagingSenderId: "181374074515",
+        appId: "1:181374074515:web:713f0b2a57538411315766"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Real-time listener updating participant count starting from base 1248
+    database.ref('participants').on('value', (snapshot) => {
+        let count = 1248;
+        if (snapshot.exists()) {
+            count += snapshot.numChildren();
+        }
+        document.getElementById('liveParticipantCount').innerText = count.toLocaleString();
+    });
+
+    function goToScreen(screenNum) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById('s'+n).classList.add('active');
+        document.getElementById('screen' + screenNum).classList.add('active');
+        
+        if(screenNum === 2) {
+            renderPayPalButton();
+        }
     }
 
-    // Лимит од 50 поени
-    document.getElementById('pts').addEventListener('input', function() {
-        if(this.value > 50) this.value = 50;
-    });
+    function updatePointsCalculation() {
+        let inputField = document.getElementById('userPoints');
+        if (inputField.value === "") {
+            document.getElementById('priceText').innerText = "Total Fee: $0.00 USD";
+            return;
+        }
+        let pts = parseInt(inputField.value);
+        if (pts > 50) {
+            inputField.value = 50;
+            pts = 50;
+        }
+        document.getElementById('priceText').innerText = "Total Fee: $" + pts + ".00 USD";
+    }
 
-    // Firebase live counter
-    db.ref('participants').on('value', snap => {
-        const count = 1248 + (snap.numChildren() || 0);
-        document.getElementById('participantCount').innerText = count.toLocaleString() + "+ participants";
-    });
+    function enforceMinimum() {
+        let inputField = document.getElementById('userPoints');
+        let pts = parseInt(inputField.value);
+        if (isNaN(pts) || pts < 1) {
+            inputField.value = 1;
+            updatePointsCalculation();
+        } else if (pts > 50) {
+            inputField.value = 50;
+            updatePointsCalculation();
+        }
+    }
 
-    // PayPal logic (skipping full code here for brevity, keep existing integration)
+    function generateCodes(count) {
+        let codes = [];
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for (let i = 0; i < count; i++) {
+            let code = "GT-";
+            for (let j = 0; j < 6; j++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            codes.push(code);
+        }
+        return codes;
+    }
+
+    let paypalRendered = false;
+    function renderPayPalButton() {
+        const container = document.getElementById('paypal-button-container');
+        if (paypalRendered) return;
+        
+        if (typeof paypal === 'undefined') {
+            container.innerHTML = "<p style='color:#EF4444; font-size:11px; text-align:center;'>PayPal SDK failed to load. Check network connection.</p>";
+            return;
+        }
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                let name = document.getElementById('userName').value.trim();
+                let email = document.getElementById('userEmail').value.trim();
+                
+                if(!name || !email) {
+                    alert("Please fill in your name and email before proceeding.");
+                    throw new Error("Missing user details");
+                }
+
+                let pts = parseInt(document.getElementById('userPoints').value) || 1;
+                if(pts > 50) pts = 50;
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: pts.toString()
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    saveUserDataToFirebase();
+                });
+            },
+            onError: function(err) {
+                alert("Transaction error or cancelled. Please try again.");
+            }
+        }).render('#paypal-button-container');
+        
+        paypalRendered = true;
+    }
+
+    function saveUserDataToFirebase() {
+        let name = document.getElementById('userName').value.trim();
+        let email = document.getElementById('userEmail').value.trim();
+        let points = parseInt(document.getElementById('userPoints').value) || 1;
+        if(points > 50) points = 50;
+
+        let userCodes = generateCodes(points);
+        let timestamp = new Date().toISOString();
+
+        let newUserRef = database.ref('participants').push();
+        newUserRef.set({
+            name: name,
+            email: email,
+            points: points,
+            codes: userCodes,
+            createdAt: timestamp
+        }, function(error) {
+            if (error) {
+                alert("Database synchronization error. Please contact support.");
+            } else {
+                document.getElementById('resName').innerText = name;
+                document.getElementById('resEmail').innerText = email;
+                document.getElementById('resPoints').innerText = points + " Entries ($" + points + ".00 USD)";
+                
+                let codesHtml = userCodes.join("<br>");
+                document.getElementById('resCodesList').innerHTML = codesHtml;
+
+                goToScreen(3);
+            }
+        });
+    }
 </script>
+
 </body>
 </html>
