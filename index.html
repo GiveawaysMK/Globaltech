@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Global Tech Distribution | Autumn Allocation 2026</title>
+    <title>Win iPhone 17 Pro Max | Ultimate Global Giveaway</title>
     
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -14,13 +14,14 @@
 
     <style>
         :root {
-            --glass-bg: rgba(18, 18, 28, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent: #2563EB;
-            --accent-glow: rgba(37, 99, 235, 0.3);
-            --text-main: #F8FAFC;
-            --text-sub: #94A3B8;
-            --input-bg: rgba(15, 23, 42, 0.6);
+            --glass-bg: rgba(18, 14, 12, 0.88);
+            --glass-border: rgba(255, 138, 76, 0.2);
+            --accent: #FF6B00; /* iPhone 17 signature cosmic orange */
+            --accent-hover: #E05E00;
+            --accent-glow: rgba(255, 107, 0, 0.4);
+            --text-main: #FFFFFF;
+            --text-sub: #D1D5DB;
+            --input-bg: rgba(30, 20, 16, 0.75);
             --success: #10B981;
         }
 
@@ -29,10 +30,14 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         body {
-            background: radial-gradient(circle at 50% 0%, #0f172a, #020617);
+            background: radial-gradient(circle at 50% 0%, #2e1205, #080504);
             color: var(--text-main);
             min-height: 100vh;
             width: 100vw;
@@ -48,12 +53,12 @@
             max-width: 440px;
             min-height: 94vh;
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 24px 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 138, 76, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -67,217 +72,261 @@
 
         .screen.active {
             display: flex;
-            animation: fadeIn 0.3s ease-out;
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .brand-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
+        /* Animated Apple Logo */
         .logo-badge {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 14px auto;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 12px auto;
+            background: linear-gradient(135deg, #ff6b00, #b33600);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.5);
+            animation: floatAndPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes floatAndPulse {
+            0% { transform: translateY(0px) scale(1); box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4); }
+            50% { transform: translateY(-5px) scale(1.05); box-shadow: 0 12px 30px rgba(255, 107, 0, 0.65); }
+            100% { transform: translateY(0px) scale(1); box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4); }
         }
 
         .logo-badge svg {
-            width: 30px;
-            height: 30px;
-            fill: #60A5FA;
+            width: 36px;
+            height: 36px;
+            fill: #ffffff;
+            animation: subtleSpin 6s linear infinite;
+        }
+
+        @keyframes subtleSpin {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+            100% { transform: rotate(0deg); }
         }
 
         h1 {
-            font-size: 21px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             color: #ffffff;
             margin-bottom: 4px;
+            background: linear-gradient(to right, #ffffff, #ffb380);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 12px;
-            color: var(--text-sub);
+            font-size: 11px;
+            color: #ffb380;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
+            letter-spacing: 1.2px;
+            font-weight: 700;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .stat-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 138, 76, 0.15);
+            border-radius: 16px;
+            padding: 10px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .stat-box .number {
             font-size: 16px;
-            font-weight: 700;
-            color: #60A5FA;
+            font-weight: 800;
+            color: #ff944d;
             margin-bottom: 2px;
         }
 
         .stat-box .label {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-sub);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            font-weight: 600;
         }
 
         .info-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 138, 76, 0.15);
+            border-radius: 18px;
             padding: 14px 16px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
+            max-height: 175px;
+            overflow-y: auto;
         }
 
         .info-card h3 {
             font-size: 11px;
-            color: #60A5FA;
+            color: #ffb380;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+
+        .info-card p {
+            font-size: 11px;
+            color: var(--text-sub);
+            line-height: 1.5;
             margin-bottom: 8px;
-            font-weight: 700;
         }
 
         .info-card ul {
             list-style: none;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-sub);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .info-card ul li::before {
-            content: "▪ ";
-            color: #60A5FA;
+            content: "🔥 ";
         }
 
         .hardware-showcase {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(90deg, rgba(37,99,235,0.08), rgba(255,255,255,0.02));
-            border: 1px solid rgba(37,99,235,0.2);
-            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(128, 43, 0, 0.3));
+            border: 1px solid rgba(255, 148, 77, 0.5);
+            border-radius: 16px;
             padding: 12px 16px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.2);
         }
 
         .hardware-info h4 {
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 800;
             color: #fff;
+            letter-spacing: -0.2px;
         }
 
         .hardware-info p {
-            font-size: 11px;
-            color: var(--text-sub);
+            font-size: 10px;
+            color: #ffb380;
+            font-weight: 500;
+            margin-top: 2px;
         }
 
         .hardware-tag {
-            background: rgba(37, 99, 235, 0.2);
-            color: #60A5FA;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 6px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 6px 10px;
+            border-radius: 8px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(255, 107, 0, 0.5);
         }
 
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             text-align: left;
         }
 
         label {
             display: block;
             font-size: 10px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-sub);
             text-transform: uppercase;
-            margin-bottom: 6px;
-            letter-spacing: 0.8px;
+            margin-bottom: 5px;
+            letter-spacing: 0.9px;
         }
 
         input {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 16px;
             background: var(--input-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
             font-size: 14px;
             outline: none;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
 
         input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+            background: rgba(40, 25, 20, 0.9);
         }
 
         .price-display {
-            background: rgba(37, 99, 235, 0.08);
-            border: 1px solid rgba(37, 99, 235, 0.2);
-            border-radius: 12px;
+            background: rgba(255, 107, 0, 0.15);
+            border: 1px solid rgba(255, 107, 0, 0.4);
+            border-radius: 14px;
             padding: 12px;
             text-align: center;
             font-size: 14px;
-            font-weight: 600;
-            color: #60A5FA;
-            margin: 10px 0 14px 0;
+            font-weight: 800;
+            color: #ffb380;
+            margin: 8px 0 12px 0;
+            letter-spacing: 0.3px;
         }
 
         .security-notice {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-sub);
             text-align: center;
-            line-height: 1.5;
-            margin-bottom: 14px;
-            background: rgba(0,0,0,0.2);
+            line-height: 1.4;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.3);
             padding: 10px;
-            border-radius: 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 138, 76, 0.1);
         }
 
         .btn {
             width: 100%;
-            padding: 15px;
-            background: var(--accent);
+            padding: 14px;
+            background: linear-gradient(135deg, #ff6b00, #cc5500);
             color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px var(--accent-glow);
-            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 6px 20px var(--accent-glow);
+            transition: all 0.25s ease;
             text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.65);
+            background: linear-gradient(135deg, #ff8533, #ff6b00);
         }
 
         .btn:active {
             transform: scale(0.98);
-            opacity: 0.9;
         }
 
         .btn-secondary {
@@ -285,30 +334,36 @@
             border: 1px solid var(--glass-border);
             color: var(--text-main);
             box-shadow: none;
-            margin-top: 8px;
+            margin-top: 6px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: none;
         }
 
         .codes-container {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 138, 76, 0.2);
+            border-radius: 12px;
             padding: 10px;
-            max-height: 110px;
+            max-height: 100px;
             overflow-y: auto;
             font-family: monospace;
-            font-size: 12px;
-            color: #60A5FA;
-            margin-top: 8px;
+            font-size: 11px;
+            color: #ffb380;
+            margin-top: 6px;
             text-align: left;
         }
 
         .footer-info {
             text-align: center;
-            font-size: 10px;
-            color: rgba(255,255,255,0.3);
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
             letter-spacing: 1.2px;
-            margin-top: 15px;
+            margin-top: 10px;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -321,56 +376,59 @@
         <div>
             <div class="brand-header">
                 <div class="logo-badge">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    <!-- Animated Apple Logo SVG -->
+                    <svg viewBox="0 0 170 170" width="100%" height="100%">
+                        <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.17-2.61-7.01-7.23-11.53-13.84-6.3-9.22-11.26-19.34-14.88-30.36-3.62-11.03-5.43-21.73-5.43-32.11 0-14.62 3.73-26.69 11.19-36.2 7.46-9.51 16.92-14.34 28.38-14.48 4.79 0 10.12 1.21 15.98 3.63 5.86 2.42 9.77 3.63 11.74 3.63 1.74 0 5.8-1.29 12.18-3.88 6.38-2.58 11.95-3.8 16.71-3.66 12.87.54 22.9 4.87 30.1 12.99-11.51 7.01-17.15 16.65-16.92 28.92.22 9.79 4.13 17.92 11.73 24.39 7.6 6.47 16.59 9.99 26.97 10.56-2.5 7.74-5.9 15.61-10.21 23.61zM119.22 32.5c0-7.85 2.87-15.15 8.6-21.9 5.73-6.75 13.06-10.6 21-11.55.11 1.09.16 2.07.16 2.94 0 7.74-3.05 15.36-9.14 22.87-6.09 7.51-13.56 11.66-22.41 12.46-.11-.98-.21-1.95-.21-2.92z"/>
                     </svg>
                 </div>
-                <h1>Global Tech Allocation</h1>
-                <p class="subtitle">Q3 Hardware Distribution Portal</p>
+                <h1>iPhone 17 Pro Max Giveaway</h1>
+                <p class="subtitle">Official Cosmic Orange Edition 2026</p>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-box">
-                    <div class="number">15 Units</div>
-                    <div class="label">Allocation Pool</div>
+                    <div class="number">15 Devices</div>
+                    <div class="label">Global Prize Pool</div>
                 </div>
                 <div class="stat-box">
-                    <div class="number">Active</div>
-                    <div class="label">Status</div>
+                    <div class="number">Live Now</div>
+                    <div class="label">Event Status</div>
                 </div>
             </div>
 
             <div class="hardware-showcase">
                 <div class="hardware-info">
                     <h4>iPhone 17 Pro Max</h4>
-                    <p>256GB • Titanium Edition</p>
+                    <p>256GB • Cosmic Orange Titanium</p>
                 </div>
-                <div class="hardware-tag">Flagship</div>
+                <div class="hardware-tag">Grand Prize</div>
             </div>
 
             <div class="info-card">
-                <h3>Distribution Protocol</h3>
+                <h3>Welcome to Our Ultimate Event!</h3>
+                <p>Hello participants! We are proud to bring you this exclusive global opportunity to win the ultimate technological masterpiece – the <strong>iPhone 17 Pro Max</strong> in the breathtaking <em>Cosmic Orange</em> edition.</p>
+                <h3>Giveaway Rules & Info</h3>
                 <ul>
-                    <li>Open allocation for verified registered participants.</li>
-                    <li>Entry tickets are dynamically generated per unit allocation ($1 per ticket).</li>
-                    <li>Final selection audit scheduled for August 25, 2026.</li>
-                    <li>Maximum participation threshold: 50 tickets ($50) per entity.</li>
+                    <li>Open worldwide for all verified participants.</li>
+                    <li>Boost your winning chances by securing more entries ($1 per entry).</li>
+                    <li>Live grand prize drawing scheduled for August 25, 2026.</li>
+                    <li>Maximum limit: 50 entries per participant.</li>
                 </ul>
             </div>
         </div>
 
         <div>
-            <button class="btn" onclick="goToScreen(2)">Proceed to Registration</button>
-            <div class="footer-info">Encrypted Session • Secure Gateway</div>
+            <button class="btn" onclick="goToScreen(2)">Enter Giveaway Now</button>
+            <div class="footer-info">Secure Official Apple Partner Portal</div>
         </div>
     </div>
 
     <!-- SCREEN 2: REGISTRATION & PAYMENT -->
     <div id="screen2" class="screen">
         <div>
-            <div class="brand-header" style="margin-bottom: 14px;">
-                <h1>Participant Verification</h1>
-                <p class="subtitle">Complete details to secure allocation entries</p>
+            <div class="brand-header" style="margin-bottom: 12px;">
+                <h1>Secure Your Entries</h1>
+                <p class="subtitle">Fill in your info to join the draw</p>
             </div>
 
             <div id="userForm">
@@ -380,19 +438,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Corporate / Personal Email</label>
+                    <label>Personal Email</label>
                     <input type="email" id="userEmail" placeholder="john.doe@domain.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Allocation Tickets ($1 each, max 50)</label>
+                    <label>Giveaway Entries ($1 each, max 50)</label>
                     <input type="number" id="userPoints" min="1" max="50" value="1" oninput="updatePointsCalculation()" onblur="enforceMinimum()" required>
                 </div>
 
                 <div class="price-display" id="priceText">Total Fee: $1.00 USD</div>
 
                 <div class="security-notice">
-                    Secure checkout processed via <strong>PayPal</strong>. Major credit and debit cards accepted.
+                    Secure checkout processed safely via <strong>PayPal</strong>. Major cards accepted.
                 </div>
 
                 <!-- PayPal Button Container -->
@@ -409,35 +467,49 @@
     <div id="screen3" class="screen">
         <div>
             <div class="brand-header">
-                <div style="font-size: 36px; margin-bottom: 8px;">🛡️</div>
-                <h1 style="color: var(--success);">Registration Confirmed</h1>
-                <p class="subtitle">Your allocation has been successfully recorded</p>
+                <div style="font-size: 38px; margin-bottom: 6px;">🎉</div>
+                <h1 style="color: var(--success);">You're In the Draw!</h1>
+                <p class="subtitle">Your entry has been successfully registered</p>
             </div>
 
-            <div class="info-card" style="border-color: rgba(16, 185, 129, 0.3);">
-                <h3>Audit Summary</h3>
+            <div class="info-card" style="border-color: rgba(16, 185, 129, 0.4); max-height: 220px;">
+                <h3>Participant Pass</h3>
                 <ul>
-                    <li><strong>Participant:</strong> <span id="resName" style="color:white;"></span></li>
+                    <li><strong>Name:</strong> <span id="resName" style="color:white;"></span></li>
                     <li><strong>Email:</strong> <span id="resEmail" style="color:white;"></span></li>
-                    <li><strong>Tickets Assigned:</strong> <span id="resPoints" style="color:#60A5FA;"></span></li>
+                    <li><strong>Entries Secured:</strong> <span id="resPoints" style="color:#ffb380;"></span></li>
                 </ul>
-                <div class="codes-container" id="resCodesList">Generating secure hashes...</div>
+                <div class="codes-container" id="resCodesList">Generating secure entry hashes...</div>
             </div>
 
-            <div class="security-notice" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); color: #CBD5E1;">
-                Your unique ticket hashes have been securely logged for the August 25 audit. Keep a record of your credentials.
+            <div class="security-notice" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); color: #CBD5E1;">
+                Your unique ticket hashes are saved for the August 25 live drawing. Save your codes!
             </div>
         </div>
 
         <div>
-            <button class="btn" onclick="location.reload()">Close Session</button>
-            <div class="footer-info">Global Tech Distribution © 2026</div>
+            <button class="btn" onclick="location.reload()">Done</button>
+            <div class="footer-info">iPhone 17 Pro Max Giveaway © 2026</div>
         </div>
     </div>
 
 </div>
 
 <script>
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Right-Click Inspect
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || 
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) || 
+            (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     // Firebase Initialization
     const firebaseConfig = {
         apiKey: "AIzaSyBjtLcksqBPEjFoo0KowMIay2cHCwOY-OY",
@@ -559,7 +631,7 @@
             } else {
                 document.getElementById('resName').innerText = name;
                 document.getElementById('resEmail').innerText = email;
-                document.getElementById('resPoints').innerText = points + " Tickets ($" + points + ".00 USD)";
+                document.getElementById('resPoints').innerText = points + " Entries ($" + points + ".00 USD)";
                 
                 let codesHtml = userCodes.join("<br>");
                 document.getElementById('resCodesList').innerHTML = codesHtml;
