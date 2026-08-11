@@ -213,6 +213,8 @@
             display: flex;
             align-items: flex-start;
             line-height: 1.45;
+            word-break: normal;
+            word-wrap: break-word;
         }
 
         .info-card ul li::before {
@@ -222,6 +224,7 @@
             font-size: 16px;
             margin-right: 8px;
             line-height: 1;
+            flex-shrink: 0;
         }
 
         .info-card ul li strong {
@@ -254,6 +257,8 @@
             color: var(--text-sub);
             line-height: 1.55;
             margin-bottom: 8px;
+            word-break: normal;
+            word-wrap: break-word;
         }
 
         .about-us-card p:last-child {
@@ -440,42 +445,6 @@
         #paypal-button-container {
             margin-top: 10px;
         }
-
-        /* Mobile & Large Screen Responsiveness */
-        @media only screen and (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            .app-container {
-                min-height: calc(100vh - 20px);
-                border-radius: 20px;
-                padding: 20px 16px;
-            }
-            .iphone-logo-badge {
-                width: 60px;
-                height: 60px;
-            }
-            h1 {
-                font-size: 20px;
-            }
-            .btn {
-                padding: 14px;
-                font-size: 14px;
-            }
-        }
-
-        @media only screen and (min-width: 1024px) {
-            .app-container {
-                max-width: 500px;
-                padding: 35px 28px;
-            }
-            h1 {
-                font-size: 26px;
-            }
-            .info-card, .about-us-card {
-                padding: 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -508,10 +477,10 @@
             <div class="info-card">
                 <h3>Campaign Details</h3>
                 <ul>
-                    <li>Grand Prize: <strong> 15x iPhone 17 Pro Max </strong>devices.</li>
-                    <li>Each point ($1 USD) grants a unique raffle entry code.</li>
-                    <li> Maximum participation limit: <strong>50 points</strong> ($50) per user.</li>
-                    <li> Public live drawing: <strong> August 25, 2026 </strong> directly in-app. </li>
+                    <li>Grand Prize: <strong>15x iPhone 17 Pro Max</strong> devices.</li>
+                    <li>Each point (<strong>$1 USD</strong>) grants a unique raffle entry code.</li>
+                    <li>Maximum participation limit: <strong>50 points</strong> ($50) per user.</li>
+                    <li>Public live drawing: <strong>August 25, 2026</strong> directly in-app.</li>
                 </ul>
             </div>
 
@@ -531,7 +500,7 @@
     <!-- SCREEN 2: PAYMENT & DETAILS -->
     <div id="screen2" class="screen">
         <div>
-            <div class="brand-header" style="margin-bottom: 16px;">
+            <div class="brand-header">
                 <h1>Register Entry</h1>
                 <p class="subtitle">Fill in your details and select raffle entry points</p>
             </div>
